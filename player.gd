@@ -1,5 +1,6 @@
 extends Area2D
 signal hit
+signal money_hit
 @export var speed = 400
 var screen_size
 # Called when the node enters the scene tree for the first time.
@@ -43,7 +44,11 @@ func start(pos):
 	$CollisionShape2D.disabled = false
 
 func _on_body_entered(body):
-	hide() # Player disappears after being hit.
-	hit.emit()
-	# Must be deferred as we can't change physics properties on a physics callback.
-	$CollisionShape2D.set_deferred("disabled", true)
+	if (body.name == 'Money') :
+		money_hit.emit()
+	else:	
+		hide() # Player disappears after being hit.
+		hit.emit()
+		# Must be deferred as we can't change physics properties on a physics callback.
+		$CollisionShape2D.set_deferred("disabled", true)
+	

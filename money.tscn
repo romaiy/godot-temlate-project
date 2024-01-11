@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://dj45hf76nrlt2"]
+
+[ext_resource type="Script" path="res://money.gd" id="1_flexn"]
+[ext_resource type="Texture2D" uid="uid://cbgm60n2xgask" path="res://art/playerGrey_up1.png" id="2_xf7xq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6kqg5"]
+radius = 8.0
+height = 20.0
+
+[node name="money" type="StaticBody2D"]
+script = ExtResource("1_flexn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_xf7xq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_6kqg5")
+
+[node name="MoneyTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="RespawnMoneyTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[connection signal="timeout" from="MoneyTimer" to="." method="_on_money_timer_timeout"]
+[connection signal="timeout" from="RespawnMoneyTimer" to="." method="_on_respawn_money_timer_timeout"]

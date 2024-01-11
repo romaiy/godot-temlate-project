@@ -23,7 +23,7 @@ func new_game():
 	$Player.start($StartPosition.position)
 	$StartTimer.start()
 	
-func _on_score_timer_timeout():
+func get_money():
 	score += 1
 	$HUD.update_score(score)
 	
